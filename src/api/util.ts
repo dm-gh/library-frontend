@@ -1,6 +1,7 @@
 ////// Responses //////
 
 export type DateString = string; // YYYY-MM-DDTHH:mm:ss.SSSZ
+export type RichText = string; // Markdown format
 
 export type StrapiEntity<E> = E & {
   createdAt: DateString;
@@ -44,14 +45,11 @@ export type StrapiError = {
 ////// Api Util //////
 
 export type CollectionApi<Type> = {
-  create: (data: Type) => Promise<StrapiCollectionOneResponse<Type> | StrapiError>;
-  delete: (id: number) => Promise<StrapiCollectionOneResponse<Type> | StrapiError>;
-  find: () => Promise<StrapiCollectionResponse<Type> | StrapiError>;
-  findOne: (id: number) => Promise<StrapiCollectionOneResponse<Type> | StrapiError>;
-  update: (
-    id: number,
-    data: Partial<Type>,
-  ) => Promise<StrapiCollectionOneResponse<Type> | StrapiError>;
+  create: (data: Type) => Promise<StrapiCollectionOneResponse<Type>>;
+  delete: (id: number) => Promise<StrapiCollectionOneResponse<Type>>;
+  find: () => Promise<StrapiCollectionResponse<Type>>;
+  findOne: (id: number) => Promise<StrapiCollectionOneResponse<Type>>;
+  update: (id: number, data: Partial<Type>) => Promise<StrapiCollectionOneResponse<Type>>;
 };
 
 const getBackendUrl = (...parts: string[]) =>
@@ -64,25 +62,25 @@ export function createCollectionApi<Type>(url: string): CollectionApi<Type> {
       body: JSON.stringify({ data }),
     });
     const responseJson = await response.json();
-    return responseJson as StrapiCollectionOneResponse<Type> | StrapiError;
+    return responseJson as StrapiCollectionOneResponse<Type>;
   };
 
   const deleteFn = async (id: number) => {
     const response = await fetch(getBackendUrl(url, String(id)), { method: 'DELETE' });
     const responseJson = await response.json();
-    return responseJson as StrapiCollectionOneResponse<Type> | StrapiError;
+    return responseJson as StrapiCollectionOneResponse<Type>;
   };
 
   const findFn = async () => {
     const response = await fetch(getBackendUrl(url));
     const responseJson = await response.json();
-    return responseJson as StrapiCollectionResponse<Type> | StrapiError;
+    return responseJson as StrapiCollectionResponse<Type>;
   };
 
   const findOneFn = async (id: number) => {
     const response = await fetch(getBackendUrl(url, String(id)));
     const responseJson = await response.json();
-    return responseJson as StrapiCollectionOneResponse<Type> | StrapiError;
+    return responseJson as StrapiCollectionOneResponse<Type>;
   };
 
   const updateFn = async (id: number, data: Partial<Type>) => {
@@ -91,7 +89,7 @@ export function createCollectionApi<Type>(url: string): CollectionApi<Type> {
       body: JSON.stringify({ data }),
     });
     const responseJson = await response.json();
-    return responseJson as StrapiCollectionOneResponse<Type> | StrapiError;
+    return responseJson as StrapiCollectionOneResponse<Type>;
   };
 
   return {
@@ -103,10 +101,24 @@ export function createCollectionApi<Type>(url: string): CollectionApi<Type> {
   };
 }
 
-export function unwrapStrapiArray<Type>(
-  response: StrapiCollectionResponse<Type> | StrapiError,
-): Type[] {
+export function unwrapStrapiArray<Type>(response: StrapiCollectionResponse<Type>): Type[] {
   if (response.data === null) return [];
 
   return response.data.map(item => item.attributes);
+}
+
+export function unwrapStrapiArrayToMap<Type extends { slug: string }>(
+  response: StrapiCollectionResponse<Type>,
+): { [slug: string]: Type } {
+  if (response.data === null) return {};
+
+  return response.data
+    .map(item => item.attributes)
+    .reduce(
+      (acc, next) => ({
+        ...acc,
+        [next.slug]: next,
+      }),
+      {},
+    );
 }

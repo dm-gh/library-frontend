@@ -1,11 +1,26 @@
 <script lang="ts">
-  import Table from './lib/Table.svelte';
-  import { verbsApi } from './api';
-  import { unwrapStrapiArray } from './api/util';
+  import { Router, Route } from 'svelte-routing';
 
-  verbsApi.find().then(unwrapStrapiArray).then(console.log);
+  import Aside from './lib/aside/Aside.svelte';
+  import IrregularVerbs from './pages/IrregularVerbs.svelte';
+  import IndividualVerbs from './pages/IndividualVerbs.svelte';
+  import NormalVerbs from './pages/NormalVerbs.svelte';
 </script>
 
-<main>
-  <Table/>
-</main>
+<Router>
+  <div class="flex flex-1 p-4">
+    <Aside />
+
+    <main class="ml-4 flex-1">
+      <Route path="irregular">
+        <IrregularVerbs />
+      </Route>
+      <Route path="individual">
+        <IndividualVerbs />
+      </Route>
+      <Route path="normal">
+        <NormalVerbs />
+      </Route>
+    </main>
+  </div>
+</Router>
