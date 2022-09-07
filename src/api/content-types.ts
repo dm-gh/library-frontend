@@ -20,7 +20,7 @@ export type Verb = {
   trans: string;
   slug: string;
   group: VerbGroup;
-  info: RichText;
+  info: RichText | null;
 };
 
 export type HelpTip = {

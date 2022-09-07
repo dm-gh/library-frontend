@@ -1,28 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './assets/fonts.css';
+@import './assets/global.css';
 
-@font-face {
-  font-family: Lora;
-  font-weight: 400;
-  src: url(/fonts/Lora-Regular.woff);
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Lora;
-  font-weight: 500;
-  src: url(/fonts/Lora-Medium.woff);
-  font-display: swap;
-}
-
-body {
-  @apply bg-background;
-  @apply text-on-background;
-  @apply font-fancy;
-}
-
-#app {
-  @apply w-screen h-screen flex flex-col;
-}
 

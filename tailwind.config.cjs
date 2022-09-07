@@ -8,25 +8,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FAB89E',
-        secondary: '#1D1A31',
-        error: '#C73253',
-        surface: '#FCD5C5',
-        background: '#FFF4EB',
+        primary: '#e8006f',
+        'primary-darker': '#cf0063',
+        secondary: '#369E37',
+        error: '#da2d2b',
+        surface: '#f7f8fa',
+        'surface-darker': '#edeef2',
+        background: '#f8eef3',
 
-        'on-primary': '#1B1420',
-        'on-secondary': '#F5F4F6',
-        'on-error': '#F5F4F6',
-        'on-surface': '#1B1420',
-        'on-background': '#1B1420',
+        'on-primary': '#FFFFFF',
+        'on-surface': '#000000',
+        'on-surface-light': '#565a69',
+        'on-background': '#000000',
       },
       fontFamily: {
-        'fancy': 'ui-serif, Lora, Georgia, Cambria, "Times New Roman", Times, serif',
+        'serif': 'Lora, Georgia, Cambria, "Times New Roman", Times, serif',
+        'sans': 'Montserrat, sans-serif',
       },
       flex: {
         '100': '1 1 100%'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

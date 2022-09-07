@@ -11,7 +11,7 @@
 {#if $verbsLoading}
   <Loader />
 {:else if $verbsError}
-  <Error>{$verbsError.message}</Error>
+  <Error message={$verbsError.message} />
 {:else if $irregularVerbs.length === 0}
   <Empty />
 {:else}
@@ -26,13 +26,13 @@
       <HeaderTile group={VerbGroup.Ib} />
     </div>
 
-    <div class="cell header-cell col-start-[II] row-span-2 row-start-1">
+    <div class="cell header-cell col-start-[II] row-start-2">
       <HeaderTile group={VerbGroup.II} />
     </div>
-    <div class="cell header-cell col-start-[III] row-span-2 row-start-1">
+    <div class="cell header-cell col-start-[III] row-start-2">
       <HeaderTile group={VerbGroup.III} />
     </div>
-    <div class="cell header-cell col-start-[IV]  row-span-2 row-start-1">
+    <div class="cell header-cell col-start-[IV]  row-start-2">
       <HeaderTile group={VerbGroup.IV} />
     </div>
 
@@ -46,11 +46,11 @@
       <HeaderTile group={VerbGroup.Vb} />
     </div>
 
-    <div class="cell header-cell col-start-[VI] row-span-2 row-start-1">
+    <div class="cell header-cell col-start-[VI] row-start-2">
       <HeaderTile group={VerbGroup.VI} />
     </div>
 
-    <div class="divider col-span-8" />
+    <div class="col-span-8 my-1" />
 
     {#each $irregularVerbs as verb}
       <div class="cell col-start-[{verb.group}]">
@@ -67,13 +67,9 @@
     @apply gap-2;
   }
   .cell {
-    @apply flex flex-col items-stretch;
+    @apply flex flex-col items-stretch text-xl;
   }
   .cell.header-cell {
-    @apply text-xl font-bold;
-  }
-  .divider {
-    @apply my-2 border-t-2 border-primary;
-    @apply drop-shadow-lg;
+    @apply font-medium tracking-wider;
   }
 </style>

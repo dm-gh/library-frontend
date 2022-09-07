@@ -1,17 +1,16 @@
 <script lang="ts">
   import { Router, Route } from 'svelte-routing';
-
-  import Aside from './lib/aside/Aside.svelte';
+  import Header from './lib/Header.svelte';
   import IrregularVerbs from './pages/IrregularVerbs.svelte';
   import IndividualVerbs from './pages/IndividualVerbs.svelte';
   import NormalVerbs from './pages/NormalVerbs.svelte';
 </script>
 
 <Router>
-  <div class="flex flex-1 p-4">
-    <Aside />
+  <div class="flex flex-1 flex-col p-4">
+    <Header />
 
-    <main class="ml-4 flex-1">
+    <main class="mt-10 flex-1">
       <Route path="irregular">
         <IrregularVerbs />
       </Route>

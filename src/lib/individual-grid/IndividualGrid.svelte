@@ -9,7 +9,7 @@
 {#if $verbsLoading}
   <Loader />
 {:else if $verbsError}
-  <Error>{$verbsError.message}</Error>
+  <Error message={$verbsError.message} />
 {:else if $individualVerbs.length === 0}
   <Empty />
 {:else}
