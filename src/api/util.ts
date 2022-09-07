@@ -72,7 +72,8 @@ export function createCollectionApi<Type>(url: string): CollectionApi<Type> {
   };
 
   const findFn = async () => {
-    const response = await fetch(getBackendUrl(url));
+    const params = new URLSearchParams({ 'pagination[limit]': '-1' });
+    const response = await fetch(`${getBackendUrl(url)}?${params.toString()}`);
     const responseJson = await response.json();
     return responseJson as StrapiCollectionResponse<Type>;
   };
