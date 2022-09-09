@@ -8,8 +8,12 @@ module.exports = {
         'on-primary': '#FFFFFF',
         'primary-darker': '#cf0063',
 
-        'primary-ghost': '#fdeaf1',
-        'on-primary-ghost': '#d50066',
+        'dark_primary': '#ff1a88',
+        'dark_on-primary': '#FFFFFF',
+        'dark_primary-darker': '#cf0063',
+
+        // 'primary-ghost': '#fdeaf1',
+        // 'on-primary-ghost': '#d50066',
 
         error: '#da2d2b',
 

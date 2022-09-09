@@ -25,7 +25,7 @@
           use:interactive
           on:interact={() => navigate(href)}
           class="btn-secondary"
-          class:linkActive={activeHref === href}
+          class:txt-primary={activeHref === href}
         >
           <svelte:component this={Icon} />
           <span class="mx-2">{title}</span>
@@ -45,9 +45,6 @@
 </aside>
 
 <style>
-  .linkActive {
-    @apply text-primary;
-  }
   .aside {
     @apply flex w-full justify-between;
   }

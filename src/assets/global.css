@@ -14,7 +14,9 @@ body {
 
 @layer utilities {
   .focus-outline {
-    @apply outline outline-2 outline-offset-2 outline-primary;
+    @apply outline outline-2 outline-offset-2;
+    @apply outline-primary;
+    @apply dark:outline-dark_primary;
   }
 }
 
@@ -29,18 +31,25 @@ body {
   .btn-primary {
     @apply btn;
     @apply bg-primary text-on-primary;
+    @apply dark:bg-dark_primary dark:text-dark_on-primary;
     @apply hover:bg-primary-darker;
+    @apply dark:hover:bg-dark_primary-darker;
   }
-  .btn-primary-ghost {
-    @apply btn;
-    @apply bg-primary-ghost text-on-primary-ghost;
-  }
+  /*.btn-primary-ghost {*/
+  /*  @apply btn;*/
+  /*  @apply bg-primary-ghost text-on-primary-ghost;*/
+  /*}*/
   .btn-secondary {
     @apply btn;
     @apply bg-surface text-on-surface;
     @apply hover:bg-surface-darker;
     @apply dark:bg-dark_surface dark:text-dark_on-surface;
     @apply dark:hover:bg-dark_surface-lighter;
+  }
+
+  .txt-primary {
+    @apply text-primary;
+    @apply dark:text-dark_primary;
   }
 
   .card {
