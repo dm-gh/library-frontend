@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 body {
-  @apply bg-background;
-  @apply text-on-background;
+  @apply bg-background text-on-background;
+  @apply dark:bg-dark_background dark:text-dark_on-background;
   @apply font-serif;
 }
 
 #app {
-  @apply w-screen h-screen flex flex-col;
+  @apply flex h-screen w-screen flex-col;
 }
 
 @layer utilities {
   .focus-outline {
-    @apply outline-offset-2 outline outline-2;
+    @apply outline outline-2 outline-offset-2 outline-primary;
   }
 }
 
 @layer components {
   .btn {
-    @apply focus-visible:focus-outline outline-primary;
+    @apply focus-visible:focus-outline;
     @apply rounded-2xl;
     @apply px-4 py-2;
     @apply flex;
@@ -31,22 +31,30 @@ body {
     @apply bg-primary text-on-primary;
     @apply hover:bg-primary-darker;
   }
+  .btn-primary-ghost {
+    @apply btn;
+    @apply bg-primary-ghost text-on-primary-ghost;
+  }
   .btn-secondary {
     @apply btn;
     @apply bg-surface text-on-surface;
     @apply hover:bg-surface-darker;
+    @apply dark:bg-dark_surface dark:text-dark_on-surface;
+    @apply dark:hover:bg-dark_surface-lighter;
   }
 
   .card {
     @apply relative;
     @apply bg-surface text-on-surface;
+    @apply dark:bg-dark_surface dark:text-dark_on-surface;
     @apply shadow-sm;
     @apply rounded-2xl;
     @apply p-4;
   }
   .card.cursor-pointer {
     @apply hover:bg-surface-darker;
-    @apply focus-visible:focus-outline outline-primary;
+    @apply dark:hover:bg-dark_surface-lighter;
+    @apply focus-visible:focus-outline;
   }
   .card.card-xl {
     @apply p-8;

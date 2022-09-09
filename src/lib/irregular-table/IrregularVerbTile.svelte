@@ -21,7 +21,7 @@
   <PopupCard on:close={onClose} title={verb.name}>
     <div slot="title">
       <div>{verb.name}</div>
-      <div class="text-2xl text-on-surface-light">
+      <div class="dark:text-on-surface-darker text-2xl text-on-surface-lighter">
         {verb.trans}
       </div>
     </div>

@@ -1,45 +1,37 @@
 <script lang="ts">
-  import AppsIcon from './icons/AppsIcon.svelte';
-  import WindowSectionIcon from './icons/WindowSectionIcon.svelte';
-  import AlignJustifyIcon from './icons/AlignJustifyIcon.svelte';
   import ExternalLinkAltIcon from './icons/ExternalLinkAltIcon.svelte';
-  import { navigate } from 'svelte-routing';
   import { interactive } from '../util/interactive';
   import ThemeSwitch from './ThemeSwitch.svelte';
+  import type { SvelteComponent } from 'svelte';
+  import { navigate } from '../state/currentLocation.js';
+
+  export let navLinks: {
+    Icon: SvelteComponent;
+    href: string;
+    title: string;
+  }[] = [];
+
+  export let activeHref: string = '';
 
   const editHref = import.meta.env.PUBLIC_BACKEND_BASE_URL + '/admin';
 </script>
 
 <aside class="aside">
   <div class="flex">
-    <div class="mr-2">
-      <a
-        href="irregular"
-        use:interactive
-        on:interact={() => navigate('irregular')}
-        class="btn-secondary"
-      >
-        <WindowSectionIcon />
-        <span class="mx-2">Отклоняющиеся</span>
-      </a>
-    </div>
-    <div class="mr-2">
-      <a
-        href="individual"
-        use:interactive
-        on:interact={() => navigate('individual')}
-        class="btn-secondary"
-      >
-        <AppsIcon />
-        <span class="mx-2">Индивидуальные</span>
-      </a>
-    </div>
-    <div class="mr-2">
-      <a href="normal" use:interactive on:interact={() => navigate('normal')} class="btn-secondary">
-        <AlignJustifyIcon />
-        <span class="mx-2">Обычные</span>
-      </a>
-    </div>
+    {#each navLinks as { Icon, href, title }}
+      <div class="mr-2">
+        <a
+          {href}
+          use:interactive
+          on:interact={() => navigate(href)}
+          class="btn-secondary"
+          class:linkActive={activeHref === href}
+        >
+          <svelte:component this={Icon} />
+          <span class="mx-2">{title}</span>
+        </a>
+      </div>
+    {/each}
   </div>
   <div class="flex items-center">
     <div class="mr-2">
@@ -53,6 +45,9 @@
 </aside>
 
 <style>
+  .linkActive {
+    @apply text-primary;
+  }
   .aside {
     @apply flex w-full justify-between;
   }
