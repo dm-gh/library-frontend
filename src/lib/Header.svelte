@@ -4,7 +4,8 @@
   import AlignJustifyIcon from './icons/AlignJustifyIcon.svelte';
   import ExternalLinkAltIcon from './icons/ExternalLinkAltIcon.svelte';
   import { navigate } from 'svelte-routing';
-  import { interactable } from '../util/interactable';
+  import { interactive } from '../util/interactive';
+  import ThemeSwitch from './ThemeSwitch.svelte';
 
   const editHref = import.meta.env.PUBLIC_BACKEND_BASE_URL + '/admin';
 </script>
@@ -14,7 +15,7 @@
     <div class="mr-2">
       <a
         href="irregular"
-        use:interactable
+        use:interactive
         on:interact={() => navigate('irregular')}
         class="btn-secondary"
       >
@@ -25,7 +26,7 @@
     <div class="mr-2">
       <a
         href="individual"
-        use:interactable
+        use:interactive
         on:interact={() => navigate('individual')}
         class="btn-secondary"
       >
@@ -34,18 +35,16 @@
       </a>
     </div>
     <div class="mr-2">
-      <a
-        href="normal"
-        use:interactable
-        on:interact={() => navigate('normal')}
-        class="btn-secondary"
-      >
+      <a href="normal" use:interactive on:interact={() => navigate('normal')} class="btn-secondary">
         <AlignJustifyIcon />
         <span class="mx-2">Обычные</span>
       </a>
     </div>
   </div>
-  <div class="flex">
+  <div class="flex items-center">
+    <div class="mr-2">
+      <ThemeSwitch />
+    </div>
     <a href={editHref} target="_blank" class="btn-primary">
       <ExternalLinkAltIcon />
       <span class="mx-2">Редактировать</span>

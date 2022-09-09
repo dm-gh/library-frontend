@@ -1,6 +1,6 @@
 <script lang="ts">
-  export let width: string = '24px';
-  export let height: string = '24px';
+  export let width: string = '1.5rem';
+  export let height: string = '1.5rem';
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {width} {height}>

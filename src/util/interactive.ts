@@ -1,4 +1,4 @@
-export function interactable(node: HTMLElement) {
+export function interactive(node: HTMLElement) {
   const handleClick = (event: MouseEvent) => {
     event.preventDefault();
     node.dispatchEvent(new CustomEvent('interact'));

@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { fly } from 'svelte/transition';
   import TimesIcon from '../icons/TimesIcon.svelte';
-  import { interactable } from '../../util/interactable';
+  import { interactive } from '../../util/interactive';
   import { clickOutside } from '../../util/clickOutside';
 
   const dispatch = createEventDispatcher();
@@ -23,7 +23,7 @@
       <slot name="title" />
     </span>
 
-    <div use:interactable on:interact={onClose}>
+    <div use:interactive on:interact={onClose}>
       <TimesIcon width="2.5rem" height="2.5rem" />
     </div>
   </div>

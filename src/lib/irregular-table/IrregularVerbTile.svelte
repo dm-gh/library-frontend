@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { interactable } from '../../util/interactable';
+  import { interactive } from '../../util/interactive';
   import type { Verb } from '../../api/content-types';
   import Popup from '../popup/Popup.svelte';
   import PopupCard from '../popup/PopupCard.svelte';
@@ -13,7 +13,7 @@
   const onOpen = () => (expanded = true);
 </script>
 
-<div class="card text-center" use:interactable on:interact={onOpen}>
+<div class="card text-center" use:interactive on:interact={onOpen}>
   {verb.name}
 </div>
 
