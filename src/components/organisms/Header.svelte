@@ -14,7 +14,10 @@
 
   export let activeHref: string = '';
 
-  $: activeNavLink = navLinks.find(link => link.href === activeHref);
+  $: isActive = (href: string) =>
+    activeHref.split('/').filter(Boolean)[0] === href.split('/').filter(Boolean)[0];
+
+  $: activeNavLink = navLinks.find(link => isActive(link.href));
 
   let navLinksOpened = false;
 
@@ -36,7 +39,8 @@
         on:clickOutside={() => (navLinksOpened = false)}
       >
         {#each navLinks as { Icon, href, title }}
-          <div class:order-0={activeHref === href} class:order-1={activeHref !== href}>
+          {@const active = isActive(href)}
+          <div class:order-0={active} class:order-1={!active}>
             <a
               {href}
               use:interactive
