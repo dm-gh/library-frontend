@@ -21,6 +21,11 @@ export type Verb = {
   slug: string;
   group: VerbGroup;
   info: RichText | null;
+  tags: string[];
+};
+// _Raw is what server sends. It should be converted to normal variant
+export type Verb_Raw = Omit<Verb, 'tags'> & {
+  tags: string | null;
 };
 
 export type HelpTip = {

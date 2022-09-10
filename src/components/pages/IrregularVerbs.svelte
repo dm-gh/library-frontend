@@ -1,11 +1,16 @@
 <script lang="ts">
-  import VerbTile from './IrregularVerbTile.svelte';
-  import Error from '../Error.svelte';
-  import HeaderTile from './IrregularHeaderTile.svelte';
+  import VerbTile from '../organisms/VerbTile.svelte';
+  import Error from '../molecules/Error.svelte';
+  import HeaderTile from '../organisms/VerbGroupTile.svelte';
   import { VerbGroup } from '../../api/content-types.js';
-  import { irregularVerbs, verbsLoading, verbsError } from '../../state/verbs';
-  import Loader from '../Loader.svelte';
-  import Empty from '../Empty.svelte';
+  import { verbsLoading, verbsError, verbsData } from '../../state/verbs';
+  import Loader from '../molecules/Loader.svelte';
+  import Empty from '../molecules/Empty.svelte';
+  import { derived } from 'svelte/store';
+
+  const irregularVerbs = derived(verbsData, verbs =>
+    verbs.filter(v => v.group !== VerbGroup.individual && v.group !== VerbGroup.normal),
+  );
 </script>
 
 {#if $verbsLoading}
@@ -26,12 +31,15 @@
       <HeaderTile group={VerbGroup.Ib} />
     </div>
 
-    <div class="cell header-cell col-start-[II] row-start-2">
+    <div class="col-start-[II]" />
+    <div class="cell header-cell col-start-[II]">
       <HeaderTile group={VerbGroup.II} />
     </div>
+    <div class="col-start-[III]" />
     <div class="cell header-cell col-start-[III] row-start-2">
       <HeaderTile group={VerbGroup.III} />
     </div>
+    <div class="col-start-[IV]" />
     <div class="cell header-cell col-start-[IV]  row-start-2">
       <HeaderTile group={VerbGroup.IV} />
     </div>
@@ -46,11 +54,12 @@
       <HeaderTile group={VerbGroup.Vb} />
     </div>
 
+    <div class="col-start-[VI]" />
     <div class="cell header-cell col-start-[VI] row-start-2">
       <HeaderTile group={VerbGroup.VI} />
     </div>
 
-    <div class="col-span-8 my-1" />
+    <div class="col-span-8 col-start-1 my-1" />
 
     {#each $irregularVerbs as verb}
       <div class="cell col-start-[{verb.group}]">
@@ -63,7 +72,7 @@
 <style>
   .table {
     @apply grid grid-cols-[[Ia]_1fr_[Ib]_1fr_[II]_1fr_[III]_1fr_[IV]_1fr_[Va]_1fr_[Vb]_1fr_[VI]_1fr];
-    @apply place-items-stretch;
+    @apply grid-flow-col place-items-stretch;
     @apply gap-2;
   }
   .cell {

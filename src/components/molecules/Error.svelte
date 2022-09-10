@@ -2,7 +2,7 @@
   export let message: string = '';
 </script>
 
-<div class="flex flex-col items-center p-12 font-sans text-xl">
+<div class="flex flex-col items-center p-12 text-xl">
   <div class="text-6xl">😰</div>
   <div class="mt-8">Произошла ошибка!</div>
   <div class="mt-8">Без паники! Ошибка оставила сообщение:</div>

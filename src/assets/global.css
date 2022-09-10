@@ -5,7 +5,8 @@
 body {
   @apply bg-background text-on-background;
   @apply dark:bg-dark_background dark:text-dark_on-background;
-  @apply font-serif;
+  @apply font-sans;
+  @apply selection:bg-primary/40 dark:selection:bg-dark_primary/40;
 }
 
 #app {
@@ -28,12 +29,16 @@ body {
     @apply flex;
     @apply font-sans tracking-wider;
   }
+  .btn-icon {
+    @apply btn;
+    @apply p-2;
+  }
   .btn-primary {
     @apply btn;
     @apply bg-primary text-on-primary;
     @apply dark:bg-dark_primary dark:text-dark_on-primary;
-    @apply hover:bg-primary-darker;
-    @apply dark:hover:bg-dark_primary-darker;
+    @apply hover:bg-primary-hover;
+    @apply dark:hover:bg-dark_primary-hover;
   }
   /*.btn-primary-ghost {*/
   /*  @apply btn;*/
@@ -42,14 +47,35 @@ body {
   .btn-secondary {
     @apply btn;
     @apply bg-surface text-on-surface;
-    @apply hover:bg-surface-darker;
+    @apply hover:bg-surface-hover;
     @apply dark:bg-dark_surface dark:text-dark_on-surface;
-    @apply dark:hover:bg-dark_surface-lighter;
+    @apply dark:hover:bg-dark_surface-hover;
   }
 
-  .txt-primary {
-    @apply text-primary;
-    @apply dark:text-dark_primary;
+  /*.txt-primary {*/
+  /*  @apply text-primary;*/
+  /*  @apply dark:text-dark_primary;*/
+  /*}*/
+  .txt-minor {
+    @apply text-on-surface/60;
+    @apply dark:text-dark_on-surface/60;
+  }
+
+  .btn-group {
+    @apply flex gap-2;
+    @apply rounded-2xl+1 p-1;
+    @apply shadow-sm;
+    @apply dark:shadow-md;
+    @apply bg-surface text-on-surface;
+    @apply dark:bg-dark_surface dark:text-dark_on-surface;
+  }
+
+  .tag {
+    @apply rounded-md;
+    @apply px-3;
+    @apply flex;
+    @apply bg-background text-on-surface;
+    @apply dark:bg-dark_background dark:text-dark_on-surface;
   }
 
   .card {
@@ -57,12 +83,13 @@ body {
     @apply bg-surface text-on-surface;
     @apply dark:bg-dark_surface dark:text-dark_on-surface;
     @apply shadow-sm;
+    @apply dark:shadow-md;
     @apply rounded-2xl;
     @apply p-4;
   }
   .card.cursor-pointer {
-    @apply hover:bg-surface-darker;
-    @apply dark:hover:bg-dark_surface-lighter;
+    @apply hover:bg-surface-hover;
+    @apply dark:hover:bg-dark_surface-hover;
     @apply focus-visible:focus-outline;
   }
   .card.card-xl {

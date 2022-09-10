@@ -5,6 +5,7 @@ export function interactive(node: HTMLElement) {
   };
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.code === 'Space') {
+      event.preventDefault();
       node.dispatchEvent(new CustomEvent('interact'));
     }
   };

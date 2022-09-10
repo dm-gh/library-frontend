@@ -1,7 +1,7 @@
 <script lang="ts">
-  import MoonIcon from './icons/MoonIcon.svelte';
-  import SunIcon from './icons/SunIcon.svelte';
-  import { interactive } from '../util/interactive';
+  import MoonIcon from '../atoms/MoonIcon.svelte';
+  import SunIcon from '../atoms/SunIcon.svelte';
+  import { interactive } from '../../util/interactive';
   import { writable } from 'svelte/store';
   import type { Readable } from 'svelte/store';
   import { backInOut } from 'svelte/easing';
@@ -77,7 +77,7 @@
 </svelte:head>
 
 <div
-  class="container"
+  class="btn container"
   use:interactive
   on:interact={async () => {
     colorTransitionsEnabled = true;
@@ -99,7 +99,6 @@
 
 <style>
   .container {
-    @apply btn;
     @apply relative;
     @apply h-8 w-20;
     @apply grid place-items-center;

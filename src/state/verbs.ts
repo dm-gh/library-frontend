@@ -50,13 +50,3 @@ export const verbsStore = createStore();
 export const verbsData = derived(verbsStore, $verbs => $verbs.data);
 export const verbsLoading = derived(verbsStore, $verbs => $verbs.loading);
 export const verbsError = derived(verbsStore, $verbs => $verbs.error);
-
-export const individualVerbs = derived(verbsData, verbs =>
-  verbs.filter(v => v.group === VerbGroup.individual),
-);
-export const normalVerbs = derived(verbsData, verbs =>
-  verbs.filter(v => v.group === VerbGroup.normal),
-);
-export const irregularVerbs = derived(verbsData, verbs =>
-  verbs.filter(v => v.group !== VerbGroup.individual && v.group !== VerbGroup.normal),
-);
