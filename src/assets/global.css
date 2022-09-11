@@ -40,10 +40,6 @@ body {
     @apply hover:bg-primary-hover;
     @apply dark:hover:bg-dark_primary-hover;
   }
-  /*.btn-primary-ghost {*/
-  /*  @apply btn;*/
-  /*  @apply bg-primary-ghost text-on-primary-ghost;*/
-  /*}*/
   .btn-secondary {
     @apply btn;
     @apply bg-surface text-on-surface;
@@ -52,10 +48,6 @@ body {
     @apply dark:hover:bg-dark_surface-hover;
   }
 
-  /*.txt-primary {*/
-  /*  @apply text-primary;*/
-  /*  @apply dark:text-dark_primary;*/
-  /*}*/
   .txt-minor {
     @apply text-on-surface/60;
     @apply dark:text-dark_on-surface/60;
@@ -76,6 +68,22 @@ body {
     @apply flex;
     @apply bg-background text-on-surface;
     @apply dark:bg-dark_background dark:text-dark_on-surface;
+  }
+
+  .input-range {
+    @apply rounded-xl;
+    @apply accent-primary dark:accent-dark_primary;
+    @apply focus-visible:focus-outline;
+  }
+
+  .progress::-webkit-progress-value {
+    @apply bg-primary;
+  }
+  .progress::-webkit-progress-bar {
+    @apply bg-surface;
+  }
+  .progress {
+    @apply accent-primary appearance-none text-primary;
   }
 
   .card {
