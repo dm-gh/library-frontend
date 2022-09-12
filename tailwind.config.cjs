@@ -15,6 +15,7 @@ module.exports = {
         'primary-ghost': '#fdeaf1',
         'on-primary-ghost': '#d50066',
 
+        success: '#2db324',
         error: '#da2d2b',
 
         surface: '#f7f8fa',
