@@ -95,13 +95,14 @@ body {
     @apply rounded-2xl;
     @apply p-4;
   }
-  .card.cursor-pointer:not(.disabled) {
+  button.card:not([disabled]) {
     @apply hover:bg-surface-hover;
     @apply dark:hover:bg-dark_surface-hover;
     @apply focus-visible:focus-outline;
+    @apply select-none;
   }
-  .card.cursor-pointer.disabled {
-    @apply opacity-40 pointer-events-none cursor-default;
+  button.card[disabled] {
+    @apply opacity-40 pointer-events-none;
   }
   .card.card-xl {
     @apply p-8;

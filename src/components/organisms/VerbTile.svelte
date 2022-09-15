@@ -13,9 +13,9 @@
   const onOpen = () => (expanded = true);
 </script>
 
-<div class="card text-center" use:interactive on:interact={onOpen}>
+<button class="card text-center" use:interactive on:interact={onOpen}>
   <span>{verb.name}</span>
-</div>
+</button>
 
 <Popup opened={expanded} on:outsideClick={onClose}>
   <PopupCard on:close={onClose}>

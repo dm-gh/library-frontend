@@ -17,9 +17,9 @@
       <slot name="title" />
     </span>
 
-    <div class="btn-icon" use:interactive on:interact={onClose}>
+    <button class="btn-icon" use:interactive on:interact={onClose}>
       <TimesIcon width="2.5rem" height="2.5rem" />
-    </div>
+    </button>
   </div>
 
   <slot />

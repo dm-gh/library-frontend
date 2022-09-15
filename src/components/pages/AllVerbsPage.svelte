@@ -7,7 +7,7 @@
 </script>
 
 {#if $verbsLoading}
-  <Loader />
+  <Loader>Загружаем глаголы</Loader>
 {:else if $verbsError}
   <Error message={$verbsError.message} />
 {:else if $verbsData.length === 0}

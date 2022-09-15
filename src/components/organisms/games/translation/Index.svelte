@@ -9,6 +9,8 @@
     incrementMap,
     amountOfVerbsPerRoundMap,
     amountOfRoundsMap,
+    shouldBeInfinite,
+    shouldShowCorrect,
   } from './consts';
   import type { Answer } from './consts';
   import { verbsData, verbsError, verbsLoading } from '../../../../state/verbs.js';
@@ -31,6 +33,8 @@
   let increment: number;
   let amountOfVerbsPerRound: number;
   let amountOfRounds: number;
+  let isShowCorrect: boolean;
+  let isInfinite: boolean;
 
   let answers: Answer[] = [];
 
@@ -39,11 +43,13 @@
     increment = incrementMap[diff];
     amountOfVerbsPerRound = amountOfVerbsPerRoundMap[diff];
     amountOfRounds = amountOfRoundsMap[diff];
+    isShowCorrect = shouldShowCorrect[diff];
+    isInfinite = shouldBeInfinite(diff);
   };
 </script>
 
 {#if $verbsLoading}
-  <Loader />
+  <Loader>Загружаем глаголы</Loader>
 {:else if $verbsError}
   <Error message={$verbsError.message} />
 {:else if $verbsData.length < MINIMUM_VERBS_TO_START}
@@ -76,6 +82,8 @@
           {increment}
           {amountOfVerbsPerRound}
           {amountOfRounds}
+          {isShowCorrect}
+          {isInfinite}
           verbs={$verbsData}
           on:done={event => {
             answers = event.detail;
@@ -87,6 +95,7 @@
           {difficulty}
           {answers}
           {amountOfRounds}
+          {isInfinite}
           on:replay={() => (currentScreen = Screens.Difficulty)}
         />
       {/if}

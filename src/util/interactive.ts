@@ -10,16 +10,11 @@ export function interactive(node: HTMLElement) {
     }
   };
 
-  node.setAttribute('tabindex', '1');
-  node.classList.add('cursor-pointer');
-
   node.addEventListener('click', handleClick, true);
   node.addEventListener('keydown', handleKeydown, true);
 
   return {
     destroy() {
-      node.removeAttribute('tabindex');
-      node.classList.remove('cursor-pointer');
       node.removeEventListener('click', handleClick, true);
       node.addEventListener('keydown', handleKeydown, true);
     },

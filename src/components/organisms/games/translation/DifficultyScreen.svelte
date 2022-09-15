@@ -30,16 +30,16 @@
   </div>
 
   <div class="flex items-center justify-center gap-12">
-    <div
+    <button
       class="card card-xl flex"
-      class:disabled={valueIndex === 0}
+      disabled={valueIndex === 0}
       use:interactive
       on:interact={() => (value = difficultyOrdered[valueIndex - 1])}
     >
       <AngleLeftIcon />
-    </div>
+    </button>
     {#key value}
-      <div
+      <button
         class="card card-xl flex w-64 flex-col items-center"
         in:fly={{ y: 60 }}
         use:interactive
@@ -47,15 +47,15 @@
       >
         <div class="mb-8 text-6xl">{difficultyIcons[value].icon}</div>
         <div class="text-3xl">{difficultyIcons[value].title}</div>
-      </div>
+      </button>
     {/key}
-    <div
+    <button
       class="card card-xl flex"
-      class:disabled={valueIndex === difficultyOrdered.length - 1}
+      disabled={valueIndex === difficultyOrdered.length - 1}
       use:interactive
       on:interact={() => (value = difficultyOrdered[valueIndex + 1])}
     >
       <AngleRightIcon />
-    </div>
+    </button>
   </div>
 </div>

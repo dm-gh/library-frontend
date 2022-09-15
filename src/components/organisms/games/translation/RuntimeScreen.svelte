@@ -28,6 +28,8 @@
   export let increment: number;
   export let amountOfVerbsPerRound: number;
   export let amountOfRounds: number;
+  export let isShowCorrect: boolean;
+  export let isInfinite: boolean;
   export let verbs: Verb[];
 
   let remainingMilliseconds = initialSeconds * 1000;
@@ -46,6 +48,8 @@
   };
 
   const initClock = (onDone: () => void) => {
+    if (isInfinite) return () => {};
+
     let raf;
     let lastDate = Date.now();
 
@@ -98,6 +102,7 @@
   };
 
   const lastResultPopup = (() => {
+    const delay = isShowCorrect ? 3000 : 1000;
     let timeout;
 
     const show = () => {
@@ -108,7 +113,7 @@
       }
       timeout = window.setTimeout(() => {
         isLastResultVisible = false;
-      }, 1000);
+      }, delay);
     };
 
     const destroy = () => {
@@ -154,7 +159,7 @@
     answers = answers; // svelte ref update
     lastResultPopup.show();
 
-    if (roundNumber === amountOfRounds) {
+    if (!isInfinite && roundNumber === amountOfRounds) {
       onDone();
       return;
     }
@@ -182,18 +187,19 @@
 
 <div class="flex w-screen max-w-full flex-col justify-between">
   <div class="flex flex-col items-center">
-    <div class="txt-minor self-end">
-      Раунд {roundNumber} / {amountOfRounds}
-    </div>
+    {#if !isInfinite}
+      <div class="txt-minor self-end">
+        Раунд {roundNumber} / {amountOfRounds}
+      </div>
 
-    <div class="mt-1 w-full overflow-hidden rounded-lg leading-[0]">
-      <progress
-        style="accent-color: #e8006f"
-        class="progress h-2 w-full"
-        max={initialSeconds * 1000}
-        value={remainingMilliseconds}
-      />
-    </div>
+      <div class="mt-1 w-full overflow-hidden rounded-lg leading-[0]">
+        <progress
+          class="progress h-2 w-full accent-primary"
+          max={initialSeconds * 1000}
+          value={remainingMilliseconds}
+        />
+      </div>
+    {/if}
 
     <div class="flex min-h-[1.5rem] gap-1 self-end overflow-hidden">
       {#each answers as answer}
@@ -212,7 +218,7 @@
 
       <div class="mt-8 flex items-start gap-4" in:fade|local={{ duration: 100 }}>
         {#each answerOptions as option, i}
-          <div use:interactive on:interact={() => onAnswer(option)} class="card">
+          <button use:interactive on:interact={() => onAnswer(option)} class="card">
             <span class="txt-minor text-xl">
               {option.trans}
             </span>
@@ -221,7 +227,7 @@
             >
               {HOTKEYS[i][0]}
             </div>
-          </div>
+          </button>
         {/each}
       </div>
     {/key}
@@ -239,17 +245,22 @@
         {:else}
           <TimesIcon width="3rem" height="3rem" />
           <span class="ml-2 text-xl">Неверно</span>
+          {#if isShowCorrect}
+            <span class="ml-2 text-xl text-on-background dark:text-dark_on-background">
+              Ответ: {lastResult.answer.trans}
+            </span>
+          {/if}
         {/if}
       </div>
     {/if}
   </div>
 
   <div class="self-end">
-    <div class="card" use:interactive on:interact={onDone}>
+    <button class="card" use:interactive on:interact={onDone}>
       <span class="txt-minor flex items-center text-lg font-medium">
         <span class="mr-2"> Закончить </span>
         <AngleRightIcon width="2rem" height="2rem" />
       </span>
-    </div>
+    </button>
   </div>
 </div>

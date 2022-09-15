@@ -13,6 +13,7 @@
   export let answers: Answer[];
   export let difficulty: Difficulty;
   export let amountOfRounds: number;
+  export let isInfinite: boolean;
 
   let isDetailsVisible = false;
 
@@ -20,6 +21,8 @@
   $: amountOfCorrect = answers.filter(({ isCorrect }) => isCorrect).length;
   $: percentResult = Math.ceil((amountOfCorrect / amountOfRounds) * 100);
   $: verdict = getVerdict(percentResult);
+
+  $: amountOfDoneRounds = isInfinite ? answers.length : amountOfRounds;
 
   const onReplay = () => {
     dispatch('replay');
@@ -30,10 +33,12 @@
   <div class="flex w-full flex-col items-center">
     <div class="flex max-w-prose flex-col items-center">
       <div class="txt-minor text-2xl">Результат</div>
-      <div class="mt-8 text-6xl">
-        {percentResult} %
-      </div>
-      <div class="mt-4 text-3xl">{verdict}</div>
+      {#if !isInfinite}
+        <div class="mt-8 text-6xl">
+          {percentResult} %
+        </div>
+        <div class="mt-4 text-3xl">{verdict}</div>
+      {/if}
 
       <div class="mt-8 text-lg">
         <span class="txt-minor">Сложность: </span>
@@ -41,11 +46,11 @@
         {diffIcon.title}
       </div>
       <div class="txt-minor mt-2 text-lg">
-        Раундов: {amountOfRounds}. Правильно: {amountOfCorrect}
+        Раундов: {amountOfDoneRounds}. Правильно: {amountOfCorrect}
       </div>
 
       {#if answers.length > 0}
-        <div
+        <button
           class="text-md mt-4"
           use:interactive
           on:interact={() => (isDetailsVisible = !isDetailsVisible)}
@@ -55,13 +60,13 @@
           {:else}
             Показать делали
           {/if}
-        </div>
+        </button>
       {/if}
     </div>
     {#if isDetailsVisible}
       <div class="mt-8 grid w-full grid-cols-3 gap-4">
         {#each answers as answer, i}
-          <div class="card flex items-start" in:fade={{ delay: i * 50 }}>
+          <div class="card flex items-start" in:fade={{ delay: i * 20 }}>
             {#if answer.isCorrect}
               <span class="text-success">
                 <CheckIcon />
@@ -83,10 +88,10 @@
       </div>
     {/if}
   </div>
-  <div class="card mt-8" use:interactive on:interact={onReplay}>
+  <button class="card mt-8" use:interactive on:interact={onReplay}>
     <span class="flex items-center text-lg">
       <SyncIcon width="2rem" height="2rem" />
       <span class="ml-2">Заново</span>
     </span>
-  </div>
+  </button>
 </div>

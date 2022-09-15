@@ -76,7 +76,7 @@
   {/if}
 </svelte:head>
 
-<div
+<button
   class="btn container"
   use:interactive
   on:interact={async () => {
@@ -95,7 +95,7 @@
       {/if}
     </div>
   {/key}
-</div>
+</button>
 
 <style>
   .container {
