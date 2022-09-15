@@ -78,6 +78,7 @@
 
 <button
   class="btn container"
+  aria-label="theme switch"
   use:interactive
   on:interact={async () => {
     colorTransitionsEnabled = true;
